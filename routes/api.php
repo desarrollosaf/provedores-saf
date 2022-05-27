@@ -41,3 +41,5 @@ Route::namespace('App\\Http\\Controllers\\API\V1')->group(function () {
         'tag' => 'TagController',
     ]);
 });
+
+route::resource("proveedores", "App\Http\Controllers\ProveedoresController");
