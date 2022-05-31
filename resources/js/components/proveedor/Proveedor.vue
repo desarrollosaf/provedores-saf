@@ -73,17 +73,37 @@ export default {
     },
     methods: {
         getProveedores() {
-            return axios.get('api/proveedores').then(({data}) => (this.proveedores = data.data));
+            return axios.get('api/proveedores').then(({data}) => (this.proveedores = data));
+        },
+        testApi() {
+            let url  = 'https://mexico-zip-codes.p.rapidapi.com/codigo_postal/' + 50230;
+            let options = {
+                method: 'GET',
+                url: url,
+                headers: {
+                    'X-RapidAPI-Host': 'mexico-zip-codes.p.rapidapi.com',
+                    'X-RapidAPI-Key': 'b0f17c1a38mshb7a12cfb9ade250p1885a1jsn7f4a29f4e6cb'
+                }
+            };
+            axios2.request(options).then(function (response) {
+                console.log(response.data);
+            }).catch(function (error) {
+                console.error(error);
+            });
         }
+
     },
     created() {
         this.$Progress.start();
         this.getProveedores();
+        this.testApi();
         this.$Progress.finish();
     },
 
     mounted() {
         // this.getProveedores()
+        console.log(this.proveedores)
+
     },
 
     filters: {
