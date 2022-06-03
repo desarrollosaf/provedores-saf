@@ -44,4 +44,5 @@ Route::namespace('App\\Http\\Controllers\\API\V1')->group(function () {
 
 route::resource("proveedores", "App\Http\Controllers\ProveedoresController");
 route::resource("proveedor", "App\Http\Controllers\ProveedorController");
+route::resource("documentos", "App\Http\Controllers\DocumentosController");
 route::get("asentamientos/{param}", "App\Http\Controllers\ProveedorController@getAsentamientos");
