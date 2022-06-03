@@ -4,7 +4,10 @@ namespace App\Http\Controllers;
 
 use App\Http\Controllers\API\V1\BaseController;
 use App\Http\Requests\ProveedorRequest;
+use App\Models\Asentamientos;
 use App\Models\DatosGenerales;
+use App\Models\Entidades;
+use App\Models\Municipios;
 use Illuminate\Http\Request;
 
 class ProveedorController extends BaseController
@@ -128,6 +131,15 @@ class ProveedorController extends BaseController
 
     public function getAsentamientos($param)
     {
+        $asentamientos = Asentamientos::where("codigo_postal", $param)->get();
+        $municipio = Municipios::where("id", $asentamientos[0]->municipio_id)->first();
+        $entidad = Entidades::where("id", $municipio->entidad_id)->first();
+        $data = [
+            "asentamientos" => $asentamientos,
+            "municipios" => $municipio,
+            "entidad" => $entidad
+        ];
+        return $this->sendResponse($data, "success");
 
     }
 }
