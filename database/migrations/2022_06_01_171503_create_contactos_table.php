@@ -17,9 +17,9 @@ class CreateContactosTable extends Migration
             $table->id();
             $table->bigInteger('contactable_id');
             $table->string('contactable_type');
-            $table->string("nombre")->nullable();
+            $table->string("nombre_contacto")->nullable();
             $table->string("email")->nullable();
-            $table->string("numero")->nullable();
+            $table->string("telefono")->nullable();
             $table->string("fax")->nullable();
             $table->string("url")->nullable();
             $table->index(['contactable_id', 'contactable_type']);

@@ -2,10 +2,26 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Controllers\API\V1\BaseController;
+use App\Http\Requests\ProveedorRequest;
+use App\Models\DatosGenerales;
 use Illuminate\Http\Request;
 
-class ProveedorController extends Controller
+class ProveedorController extends BaseController
 {
+    protected $datosGenerales = '';
+
+    /**
+     * Create a new controller instance.
+     *
+     * @return void
+     */
+    public function __construct(DatosGenerales $datosGenerales)
+    {
+        $this->middleware('auth:api');
+        $this->datosGenerales = $datosGenerales;
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -13,7 +29,7 @@ class ProveedorController extends Controller
      */
     public function index()
     {
-        //
+//
     }
 
     /**
@@ -29,18 +45,36 @@ class ProveedorController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(ProveedorRequest $request)
     {
+        $datosGenerales = DatosGenerales::create([
+            "user_id" => $request->id,
+            "nombre_organizacion" => $request->nombre_organizacion,
+            "rfc" => $request->rfc,
+            "sitio_web" => $request->sitio_web,
+            "razon_social" => $request->razon_social,
+        ]);
+//        $datosGenerales->domicilio()->create([
+//            "calle" => $request->calle,
+//            "numero_exterior" => $request->numero_exterior,
+//            "numero_interior" => $request->numero_interior,
+//            "codigo_postal" => $request->codigo_postal,
+//            "estado" => $request->estado,
+//            "municipio" => $request->municipio,
+//            "localidad" => $request->localidad,
+//        ]);
+        $datosGenerales->domicilio()->create($request["domicilio"]);
+        $datosGenerales->contacto()->create($request["contacto"]);
         return response()->json(["data" => ["message" => "success", "data" => $request->all()]], 200);
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param int $id
      * @return \Illuminate\Http\Response
      */
     public function show($id)
@@ -51,34 +85,49 @@ class ProveedorController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $id
+     * @param int $id
      * @return \Illuminate\Http\Response
      */
     public function edit($id)
     {
-        //
+        $data = $this->datosGenerales->where("user_id", $id)->with("domicilio")->with("contacto")->first();
+        return $this->sendResponse($data, "success");
     }
 
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param \Illuminate\Http\Request $request
+     * @param int $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(ProveedorRequest $request, $id)
     {
-        //
+        $datosGenerales = DatosGenerales::where("user_id", $id)->first();
+        $datosGenerales->update([
+            "user_id" => $request->id,
+            "nombre_organizacion" => $request->nombre_organizacion,
+            "rfc" => $request->rfc,
+            "sitio_web" => $request->sitio_web,
+            "razon_social" => $request->razon_social,
+        ]);
+        $datosGenerales->domicilio->update($request["domicilio"]);
+        $datosGenerales->contacto->update($request["contacto"]);
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param int $id
      * @return \Illuminate\Http\Response
      */
     public function destroy($id)
     {
         //
+    }
+
+    public function getAsentamientos($param)
+    {
+
     }
 }
