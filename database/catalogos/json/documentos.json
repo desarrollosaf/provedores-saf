@@ -1,0 +1,50 @@
+[
+    {
+        "documento": "Acta de Nacimiento e Identificación Oficial",
+        "regimen_id": "1"
+    },
+    {
+        "documento": "Acta Constitutiva, Poder del Representante Legal e Identificación Oficial",
+        "regimen_id": "2"
+    },
+    {
+        "documento": "Constancia de situación fiscal actualizada a la fecha del trámite",
+        "regimen_id": "3"
+    },
+    {
+        "documento": "Constancia de inscripción expedida por la SHCP en el RUPC",
+        "regimen_id": "3"
+    },
+    {
+        "documento": "Opinión de Cumplimiento de Obligaciones Fiscales ",
+        "regimen_id": "1"
+    },
+    {
+        "documento": "Constancia de Cumplimiento de Obligaciones Fiscales",
+        "regimen_id": "2"
+    },
+    {
+        "documento": "Inscripción en el Registro Estatal de Contribuyentes",
+        "regimen_id": "3"
+    },
+    {
+        "documento": "Comprobante de Domicilio actualizado a la fecha",
+        "regimen_id": "3"
+    },
+    {
+        "documento": "Currículum de la empresa, mencionando al menos 5 clientes representativos, con teléfono y nombre de la persona de contacto",
+        "regimen_id": "3"
+    },
+    {
+        "documento": "Formatos de Solicitud de Ingreso",
+        "regimen_id": "3"
+    },
+    {
+        "documento": "Carta poder para firmar y recibir contratos",
+        "regimen_id": "3"
+    },
+    {
+        "documento": "Datos bancarios para la realización de pagos a través de transferencia electrónica.",
+        "regimen_id": "3"
+    }
+]
